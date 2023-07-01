@@ -61,7 +61,7 @@ class NotificationWorker(appContext: Context, workerParams: WorkerParameters) :
 
         fun scheduleWorker(context: Context) {
             val request =
-                PeriodicWorkRequestBuilder<NotificationWorker>(WORKER_INTERVAL_MIN, TimeUnit.MINUTES)
+                PeriodicWorkRequestBuilder<UpdateDBWorker>(WORKER_INTERVAL_MIN, TimeUnit.MINUTES)
                     .build()
             WorkManager.getInstance(context).enqueueUniquePeriodicWork(
                 "boot-notifications",

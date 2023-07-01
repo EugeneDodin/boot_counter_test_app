@@ -13,6 +13,10 @@ class RebootEventsRepository(
         return rebootDao.findEvents(appPref.lastNotificationTimestamp)
     }
 
+    suspend fun addEvent() {
+        rebootDao.insert(RebootEventEntity(timestamp = System.currentTimeMillis()))
+    }
+
     fun updateLastNotificationTimestamp() {
         appPref.lastNotificationTimestamp = System.currentTimeMillis()
     }
