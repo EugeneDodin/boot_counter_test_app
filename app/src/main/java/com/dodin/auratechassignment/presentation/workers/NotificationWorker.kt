@@ -11,6 +11,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.WorkerParameters
+import com.dodin.auratechassignment.Dependency
 import com.dodin.auratechassignment.R
 import com.dodin.auratechassignment.usecase.GetNotificationTextUseCase
 import java.util.concurrent.TimeUnit
@@ -18,7 +19,9 @@ import java.util.concurrent.TimeUnit
 class NotificationWorker(appContext: Context, workerParams: WorkerParameters) :
     CoroutineWorker(appContext, workerParams) {
 
-    private lateinit var getNotificationTextUseCase: GetNotificationTextUseCase
+    private val getNotificationTextUseCase: GetNotificationTextUseCase by lazy {
+        GetNotificationTextUseCase(Dependency.repository)
+    }
 
     override suspend fun doWork(): Result {
         createNotificationChannel()
